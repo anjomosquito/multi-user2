@@ -74,7 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     //Users
 
     Route::get('/medicines', [InventoryController::class, 'index'])->name('medicines.index');
-    Route::post('/medicines/', [MedicineController::class, 'store'])->name('medicines.store');
+    Route::post('/medicines/', [InventoryController::class, 'store'])->name('medicines.store');
 
     
 

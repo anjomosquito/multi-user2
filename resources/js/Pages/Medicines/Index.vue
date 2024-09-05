@@ -223,49 +223,49 @@ const showingNavigationDropdown = ref(false);
                                 </tr>
                             </thead>
                             <tbody>
-                                
-                                <tr v-for="medicine in medicines" :key="medicine.id"  class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                                    <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                                        {{ medicine.name }}
+                                <tr
+                                    v-for="medicine in medicines"
+                                    :key="medicine.id"
+                                    class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
+                                >
+                                    <th
+                                    scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                                    >
+                                    {{ medicine.name }}
                                     </th>
                                     <!--<td class="px-6 py-4">
                                         {{ medicine.price }}
                                     </td>-->
+                                    <td class="px-6 py-4">{{ medicine.lprice }}</td>
+                                    <td class="px-6 py-4">{{ medicine.mprice }}</td>
+                                    <td class="px-6 py-4">{{ medicine.hprice }}</td>
                                     <td class="px-6 py-4">
-                                        {{ medicine.lprice }}
+                                    <!-- Quantity Selector -->
+                                    <input
+                                        type="number"
+                                        v-model.number="medicine.quantity"
+                                        min="1"
+                                        class="w-20 p-1 border border-gray-300 rounded dark:bg-gray-800 dark:text-white"
+                                    />
                                     </td>
-                                    <td class="px-6 py-4">
-                                        {{ medicine.mprice }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ medicine.hprice }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ medicine.quantity}}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ medicine.dosage }}
-                                    </td>
-                                    <td class="px-6 py-4">
-                                        {{ medicine.expdate }}
-                                    </td>
+                                    <td class="px-6 py-4">{{ medicine.dosage }}</td>
+                                    <td class="px-6 py-4">{{ medicine.expdate }}</td>
                                     <td class="flex px-6 py-4">
-                                        <Link
-                                            class="px-4 py-2 ml-4 bg-[#B5C99A] hover:bg-[#D2E0BE] text-black rounded"
-                                            @click="handleClick"
-                                            href="#"
-                                        >
-                                            Add
-                                        </Link>
-                                        <!--<Link :href="`/admin/medicines/${medicine.id}`" method="delete" @click="confirmDelete(medicine.id)" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
-                                            Delete
-                                        </Link>-->
+                                    <Link
+                                        class="px-4 py-2 ml-4 bg-[#B5C99A] hover:bg-[#D2E0BE] text-black rounded"
+                                        @click="handleClick"
+                                        href="#"
+                                    >
+                                        Add
+                                    </Link>
+                                    <!--<Link :href="`/admin/medicines/${medicine.id}`" method="delete" @click="confirmDelete(medicine.id)" class="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded">
+                                        Delete
+                                    </Link>-->
                                     </td>
-                                    
                                 </tr>
-                                
-                                
-                            </tbody>
+                                </tbody>
+
                         </table>
                     </div>
                 </div>
