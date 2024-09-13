@@ -6,9 +6,12 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\MedicineController;
 use App\Http\Controllers\Admin\AnnouncementController;
 use App\Http\Controllers\InventoryController;
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Models\Medicine;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,9 +33,13 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/admin/dashboard', function () {
+    $medicineCount = Medicine::count();  // Get the count of medicines
+    return Inertia::render('Admin/Dashboard', [
+        'medicineCount' => $medicineCount  // Pass the count to the Vue component
+    ]);
+})->middleware(['auth:admin', 'verified:admin'])->name('admin.dashboard');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -41,9 +48,12 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', function () {
-        return Inertia::render('Admin/Dashboard');
-    })->middleware(['auth:admin', 'verified:admin'])->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])
+        ->middleware(['auth:admin', 'verified:admin'])
+        ->name('dashboard');
+    
+    // Other admin routes
+
 
     
 
@@ -69,6 +79,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
     //Announcements
     Route::get('/admin/announcements/index', [AnnouncementController::class, 'index'])->name('admin.announcements.index');
+    Route::post('/admin/announcements/', [AnnouncementController::class, 'store'])->name('admin.announcements.store');
 
 
     //Users

@@ -1,6 +1,10 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AdminAuthenticatedLayout.vue';
 import { Head } from '@inertiajs/vue3';
+
+const props = defineProps({
+    medicineCount: Number  // Add this to accept the medicine count from the backend
+});
 </script>
 
 <template>
@@ -16,6 +20,11 @@ import { Head } from '@inertiajs/vue3';
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">You're logged in as an admin!</div>
                 </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 text-gray-900 dark:text-gray-100">
+                    <h2 class="text-lg font-semibold mb-4">Total Medicines</h2>
+                    <p class="text-3xl font-bold">{{ medicineCount }}</p>
+                </div>
+
             </div>
         </div>
     </AuthenticatedLayout>
